@@ -1,0 +1,12 @@
+Package: bioformatr
+Title: Functions for Parsing Files of Miscellaneous Biological Formats
+Version: 0.0.0.9000
+Authors@R: person("Andrey", "Rozenberg", email = "jaera@yandex.com", role = c("aut", "cre"))
+Description: Functions for Parsing Files of Miscellaneous Biological Formats
+Depends: R (>= 3.6.1)
+Imports:
+    dplyr
+License: MIT
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
