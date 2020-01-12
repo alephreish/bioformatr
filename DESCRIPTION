@@ -5,7 +5,9 @@ Authors@R: person("Andrey", "Rozenberg", email = "jaera@yandex.com", role = c("a
 Description: Functions for Parsing Files of Miscellaneous Biological Formats
 Depends: R (>= 3.6.1)
 Imports:
-    dplyr
+    dplyr,
+    tidyr,
+    stringr
 License: MIT
 Encoding: UTF-8
 LazyData: true
