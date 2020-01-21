@@ -61,10 +61,10 @@ read.hhr <- function(fname) {
 		rename(E.value = `E-value`) %>%
 		mutate(Aligned_cols = as.integer(Aligned_cols))
 
-	attr(data, "metadata") <- data.frame(value = all.lines[param.start:param.end]) %>%
+	attr(data, "metadata") <- data.frame(key = all.lines[param.start:param.end]) %>%
 		mutate(
-			key = substr(value, 1, 14) %>% trimws,
-			value = substr(value, 14, 10000) %>% trimws
+			value = substr(key, 14, 10000) %>% trimws,
+			key = substr(key, 1, 14) %>% trimws,
 		)
 
 	return(data)
