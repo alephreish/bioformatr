@@ -42,11 +42,11 @@ read.itol.dataset <- function(FILE) {
 
 	if (is.null(METADATA$FIELD_LABELS)) stop("FIELD_LABELS not defined")
 
-	METADATA$DATA <- all.lines[ll > dat.num] %>%
+	DATA <- all.lines[ll > dat.num] %>%
 		data.frame %>%
 		setNames("name") %>%
 		separate(name, into = c("name", METADATA$FIELD_LABELS), sep = SEP)
 
-	return(METADATA)
+	list(METADATA = METADATA, DATA = DATA)
 
 }

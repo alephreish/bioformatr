@@ -2,8 +2,11 @@
 
 export(read.cdhit.clstr)
 export(read.hhr)
+export(read.hmmer.tblout)
 export(read.itol.dataset)
+export(read.outfmt6)
 export(write.itol.dataset)
 import(dplyr)
+import(readr)
 import(stringr)
 import(tidyr)
