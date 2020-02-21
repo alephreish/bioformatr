@@ -10,9 +10,9 @@
 #' @export
 write.itol.dataset <- function(TYPE, DATA, FILE, ...) {
 	cat(
-		paste("DATASET", TYPE, sep = "_"),
+		TYPE,
 		"SEPARATOR COMMA",
-		list(...) %>% lapply(paste, collapse = ",") %>% do.call(rbind, .) %>% as.data.frame %>% mutate(cat = paste(rownames(.), V1, sep = ",")) %>% pull(cat),
+		list(...) %>% lapply(paste, collapse = ",") %>% do.call(rbind, .) %>% as.data.frame %>% mutate(cat = paste(rownames(.), !!!1, sep = ",")) %>% pull(cat),
 		"DATA",
 		DATA %>% unite(cat, sep = ",") %>% pull(cat),
 		file = FILE, sep = "\n"
