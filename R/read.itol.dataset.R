@@ -12,7 +12,7 @@ read.itol.dataset <- function(FILE) {
 	all.lines <- readLines(FILE) %>% `[`(. != "")
 	ll <- 1:length(all.lines)
 
-	typ.num <- which(grepl("^DATASET", all.lines)) %>% first
+	typ.num <- which(grepl("^[A-Z]", all.lines)) %>% first
 	sep.num <- which(grepl("^SEPARATOR", all.lines)) %>% first
 	dat.num <- which(all.lines == "DATA") %>% first
 	if (is.na(typ.num)) stop("Dataset type not defined")
