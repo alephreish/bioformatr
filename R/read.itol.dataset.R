@@ -19,7 +19,7 @@ read.itol.dataset <- function(FILE) {
 	if (is.na(sep.num)) stop("Separator not defined")
 	if (is.na(dat.num)) stop("Data not defined")
 
-	TYPE <- all.lines[typ.num] %>% substr(9, 100)
+	TYPE <- all.lines[typ.num]
 	SEPARATOR <- all.lines[sep.num] %>% substr(11, 100)
 	seps <- list(TAB = "\t", COMMA = ",")
 	SEP <- seps[[SEPARATOR]]
