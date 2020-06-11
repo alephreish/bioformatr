@@ -6,7 +6,7 @@
 \usage{
 read.outfmt6(fname, col.names = c("qseqid", "sseqid", "pident", "length",
   "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue",
-  "bitscore"))
+  "bitscore"), col.names.pre = c(), col.names.post = c())
 }
 \arguments{
 \item{fname}{input file name}
