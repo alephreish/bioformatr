@@ -91,7 +91,7 @@ read.hhr <- function(fname) {
 	}
 	attributes(data, "metadata") <- data.frame(key = all.lines[param.start:param.end]) %>%
 		mutate(value = substr(key, 14, 10000) %>% trimws, key = substr(key, 1, 14) %>% trimws) %>%
-		setNames(.$value, .$key) %>%
+		{setNames(.$value, .$key)} %>%
 		as.list
 	attr(data, "Match_columns") <- attr(data, "Match_columns") %>% as.integer
 	attr(data, "Neff")          <- attr(data, "Neff")          %>% as.integer
