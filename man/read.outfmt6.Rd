@@ -4,9 +4,13 @@
 \alias{read.outfmt6}
 \title{Read blast outfmt6 file}
 \usage{
-read.outfmt6(fname, col.names = c("qseqid", "sseqid", "pident", "length",
-  "mismatch", "gapopen", "qstart", "qend", "sstart", "send", "evalue",
-  "bitscore"), col.names.pre = c(), col.names.post = c())
+read.outfmt6(
+  fname,
+  col.names = c("qseqid", "sseqid", "pident", "length", "mismatch", "gapopen",
+    "qstart", "qend", "sstart", "send", "evalue", "bitscore"),
+  col.names.pre = c(),
+  col.names.post = c()
+)
 }
 \arguments{
 \item{fname}{input file name}
