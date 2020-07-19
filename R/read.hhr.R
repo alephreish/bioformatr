@@ -19,7 +19,7 @@ read.hhr <- function(fname) {
 	align.end <- length(all.lines)
 
 	if (is.na(align.start)) {
-		data <- data.frame(
+		data <- tibble(
 			No              =   integer(),
 			Hit.ID          = character(),
 			Hit.Description = character(),
@@ -68,8 +68,8 @@ read.hhr <- function(fname) {
 				T.hit        = value[name == "T" & grepl("^Consensus ", lag(value))]  %>% substr(., 16, nchar(.)) %>% paste(collapse = " "),
 				T.ss_dssp    = value[name == "T" & grepl("^ss_dssp ", value)]         %>% substr(., 16, nchar(.)) %>% paste(collapse = " ") %>% gsub(" +", "", .),
 				T.ss_pred    = value[name == "T" & grepl("^ss_pred ", value)]         %>% substr(., 16, nchar(.)) %>% paste(collapse = "")  %>% gsub(" ", "", .),
+				.groups = "drop"
 			) %>%
-			ungroup %>%
 			extract(Q.consensus, into = c("Q.Start", "Q.End", "Q.Length"), regex = "^ *(\\d+) .+ (\\d+) +[(](\\d+)[)]$", remove = F, convert = T) %>%
 			extract(T.consensus, into = c("T.Start", "T.End", "T.Length"), regex = "^ *(\\d+) .+ (\\d+) +[(](\\d+)[)]$", remove = F, convert = T) %>%
 			mutate(
@@ -91,8 +91,10 @@ read.hhr <- function(fname) {
 	}
 	attributes(data) <- data.frame(key = all.lines[param.start:param.end]) %>%
 		mutate(value = substr(key, 14, 10000) %>% trimws, key = substr(key, 1, 14) %>% trimws) %>%
+		filter(key != "") %>%
 		{setNames(.$value, .$key)} %>%
-		as.list
+		as.list %>%
+		c(attributes(data))
 	attr(data, "Match_columns") <- attr(data, "Match_columns") %>% as.integer
 	attr(data, "Neff")          <- attr(data, "Neff")          %>% as.integer
 	attr(data, "Searched_HMMs") <- attr(data, "Searched_HMMs") %>% as.integer
