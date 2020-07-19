@@ -89,11 +89,13 @@ read.hhr <- function(fname) {
 			rename(E.value = `E-value`) %>%
 			mutate(Aligned_cols = as.integer(Aligned_cols))
 	}
-	attr(data, "metadata") <- data.frame(key = all.lines[param.start:param.end]) %>%
-		mutate(
-			value = substr(key, 14, 10000) %>% trimws,
-			key = substr(key, 1, 14) %>% trimws,
-		)
+	attributes(data, "metadata") <- data.frame(key = all.lines[param.start:param.end]) %>%
+		mutate(value = substr(key, 14, 10000) %>% trimws, key = substr(key, 1, 14) %>% trimws) %>%
+		setNames(.$value, .$key) %>%
+		as.list
+	attr(data, "Match_columns") <- attr(data, "Match_columns") %>% as.integer
+	attr(data, "Neff")          <- attr(data, "Neff")          %>% as.integer
+	attr(data, "Searched_HMMs") <- attr(data, "Searched_HMMs") %>% as.integer
 
 	return(data)
 }
