@@ -13,15 +13,15 @@ read.hmmer <- function(fname) {
 	query.start <- grepl("^Query:", all.lines) %>% which %>% first
 	meta.lines <- all.lines[1:(query.start-1)]
 	domains <- data.frame(lines = all.lines[query.start:length(all.lines)]) %>%
-		extract(lines, into = "Query", regex = "^Query: +(.+?) +\\[M=\\d+\\]", remove = F) %>%
+		extract(lines, into = "Query", regex = "^Query: +(.+?) +\\[.=\\d+\\]", remove = F) %>%
 		fill(Query) %>%
 		group_split(Query) %>%
 		lapply(function(query.lines) {
 
 			Query <- query.lines$Query[1]
 
-			table.start   <- grepl("^Scores for complete sequences", query.lines$lines) %>% which
-			domain.start  <- grepl("^Domain annotation for each sequence", query.lines$lines) %>% which
+			table.start   <- grepl("^Scores for complete sequence", query.lines$lines) %>% which
+			domain.start  <- grepl("^Domain annotation for each", query.lines$lines) %>% which
 			summary.start <- grepl("^Internal pipeline statistics summary", query.lines$lines) %>% which
 
 			metadata[[Query]] <<- query.lines[c(1:(table.start-1), summary.start:nrow(query.lines)),] %>%
@@ -86,6 +86,7 @@ read.hmmer <- function(fname) {
 						mutate(Sequence = sequence.lines$Sequence[1], Description = str_match(sequence.lines$lines[1], ">> ([^ ]+) (.+)")[,3]) %>%
 						left_join(alignments, by = "domain")
 				}) %>% bind_rows %>%
+				mutate(Sequence = ifelse(is.null(Sequence), NA, Sequence)) %>%
 				left_join(table.data, by = "Sequence")
 		}) %>% bind_rows
 
