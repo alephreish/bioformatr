@@ -86,7 +86,6 @@ read.hmmer <- function(fname) {
 						mutate(Sequence = sequence.lines$Sequence[1], Description = str_match(sequence.lines$lines[1], ">> ([^ ]+) (.+)")[,3]) %>%
 						left_join(alignments, by = "domain")
 				}) %>% bind_rows %>%
-				mutate(Sequence = ifelse(is.null(Sequence), NA, Sequence)) %>%
 				left_join(table.data, by = "Sequence")
 		}) %>% bind_rows
 
