@@ -72,9 +72,9 @@ read.hmmer <- function(fname) {
 								rev
 							data.frame(
 								CS     = ifelse(length(Seqs) == 5, sub(" CS$", "", Seqs[5]), ""),
-								M.Seq  = sub(" \\d+$", "", Seqs[4]),
+								M.Seq  = sub("[ 0-9]+$", "", Seqs[4]),
 								Match  = Seqs[3],
-								T.Seq  = sub(" \\d+$", "", Seqs[2]),
+								T.Seq  = sub("[ 0-9]+$", "", Seqs[2]),
 								PP     = sub(" PP$", "", Seqs[1]),
 								domain = first(domain.lines$domain)
 							)
