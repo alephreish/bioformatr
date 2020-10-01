@@ -31,7 +31,7 @@ read.hmmer.tblout <- function(fname) {
 	numeric.cols <- which(col.names == "full.sequence.E.value")        : which(col.names == "domain.number.estimation.exp")
 	integer.cols <- which(col.names == "domain.number.estimation.reg") : which(col.names == "domain.number.estimation.inc")
 
-	data <- readLines(fname) %>%
+	readLines(fname) %>%
 		data.frame(line = .) %>%
 		filter(!grepl("^#", line)) %>%
 		separate(line, into = col.names, sep = " +", extra = "merge", convert = F) %>%
