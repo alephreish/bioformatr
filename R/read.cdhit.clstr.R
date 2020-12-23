@@ -13,6 +13,8 @@ read.cdhit.clstr <- function(fname) {
 		separate(Col2, into = c("Seq.Len", "Col2"), sep = "aa, >") %>%
 		extract(Col2, into = c("Seq.Name", "Is.Representative", "Col2"), regex = "(.*?)[.]{3} ([*]|at) ?(.*)") %>%
 		mutate(Is.Representative = Is.Representative == "*", Col2 = ifelse(Is.Representative, "100%", Col2)) %>%
+		group_by(Cluster) %>%
+		mutate(Representative = Seq.Name[which(Is.Representative)]) %>%
 		separate_rows(Col2, sep = ",") %>%
 		separate(Col2, into = data.fields, sep = "/", fill = "left", convert = T) %>%
 		mutate(Identity = sub("%", "", Identity) %>% as.numeric) %>%
