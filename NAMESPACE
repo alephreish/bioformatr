@@ -3,6 +3,7 @@
 export(read.cdhit.clstr)
 export(read.hhr)
 export(read.hmmer)
+export(read.hmmer.domtblout)
 export(read.hmmer.tblout)
 export(read.itol.dataset)
 export(read.outfmt6)
